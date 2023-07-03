@@ -17,6 +17,14 @@ pipeline{
 			sh '/mnt/tools/apache-maven-3.8.7/bin/mvn clean install'
 			}
 		}
+		stage('SonarQube Analysis') {
+        		steps {
+        		withSonarQubeEnv('SonarQube Server') {
+                		// Run SonarQube scanner
+                		sh 'mvn sonar:sonar'
+        		}
+        		}
+		}
 		}
 		}
 	}
